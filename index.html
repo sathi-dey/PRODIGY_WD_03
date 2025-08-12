@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav">
+        <button class="nav-btn active" onclick="showPage('home')">Home</button>
+        <button class="nav-btn" onclick="showPage('ai')">AI</button>
+        <button class="nav-btn" onclick="showPage('dashboard')">Dashboard</button>
+    </div>
+    
+    <div class="container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <h1 class="title">TIC-TAC-TOE</h1>
+            <p class="welcome-text">Welcome to the ultimate neon gaming experience!</p>
+            
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="playerName">Enter Your Name:</label>
+                    <input type="text" id="playerName" class="name-input" placeholder="Your Name Here" maxlength="20">
+                </div>
+                
+                <div class="input-group">
+                    <label>Play With:</label>
+                    <div class="option-buttons">
+                        <button class="btn" id="playWithAI" onclick="selectPlayMode('ai')">AI</button>
+                        <button class="btn" id="playWithFriend" onclick="selectPlayMode('friend')">Friend</button>
+                    </div>
+                </div>
+
+                <!-- New input group for friend's name, initially hidden -->
+                <div class="input-group" id="friendNameInputGroup" style="display: none;">
+                    <label for="friendName">Enter Friend's Name:</label>
+                    <input type="text" id="friendName" class="name-input" placeholder="Friend's Name Here" maxlength="20">
+                </div>
+                
+                <div class="input-group symbol-selection" id="symbolSelection" style="display: none;">
+                    <label>Choose Your Symbol:</label>
+                    <div class="symbol-buttons">
+                        <button class="btn symbol-btn" id="symbolX" onclick="selectSymbol('X')">X</button>
+                        <button class="btn symbol-btn" id="symbolO" onclick="selectSymbol('O')">O</button>
+                    </div>
+                </div>
+                
+                <div id="startGameGroup" style="display: none;">
+                    <button class="btn" onclick="startGame()">START GAME</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- AI Page -->
+        <div id="ai" class="page">
+            <h2 class="title" style="font-size: 3rem;">AI OPPONENT</h2>
+            <div class="game-container">
+                <div class="game-info">
+                    <div class="current-player" id="aiCurrentPlayer">Player X's Turn</div>
+                </div>
+                <div class="board" id="aiBoard">
+                    <button class="cell" onclick="makeMove(0, 'ai')"></button>
+                    <button class="cell" onclick="makeMove(1, 'ai')"></button>
+                    <button class="cell" onclick="makeMove(2, 'ai')"></button>
+                    <button class="cell" onclick="makeMove(3, 'ai')"></button>
+                    <button class="cell" onclick="makeMove(4, 'ai')"></button>
+                    <button class="cell" onclick="makeMove(5, 'ai')"></button>
+                    <button class="cell" onclick="makeMove(6, 'ai')"></button>
+                    <button class="cell" onclick="makeMove(7, 'ai')"></button>
+                    <button class="cell" onclick="makeMove(8, 'ai')"></button>
+                </div>
+                <div class="game-status" id="aiGameStatus"></div>
+                <button class="btn reset-btn" onclick="resetGame('ai')">New Game</button>
+                <button class="btn reset-btn" onclick="showPage('home')">Back to Home</button>
+            </div>
+        </div>
+        
+        <!-- Friend Page (converted to .page) -->
+        <div id="friendGame" class="page">
+            <h2 class="title" style="font-size: 2.5rem;">VS FRIEND</h2>
+            <div class="game-container">
+                <div class="game-info">
+                    <div class="current-player" id="friendCurrentPlayer">Player X's Turn</div>
+                </div>
+                <div class="board" id="friendBoard">
+                    <button class="cell" onclick="makeMove(0, 'friend')"></button>
+                    <button class="cell" onclick="makeMove(1, 'friend')"></button>
+                    <button class="cell" onclick="makeMove(2, 'friend')"></button>
+                    <button class="cell" onclick="makeMove(3, 'friend')"></button>
+                    <button class="cell" onclick="makeMove(4, 'friend')"></button>
+                    <button class="cell" onclick="makeMove(5, 'friend')"></button>
+                    <button class="cell" onclick="makeMove(6, 'friend')"></button>
+                    <button class="cell" onclick="makeMove(7, 'friend')"></button>
+                    <button class="cell" onclick="makeMove(8, 'friend')"></button>
+                </div>
+                <div class="game-status" id="friendGameStatus"></div>
+                <button class="btn reset-btn" onclick="resetGame('friend')">New Game</button>
+                <button class="btn reset-btn" onclick="backToSetup()">Back to Setup</button>
+            </div>
+        </div>
+        
+        <!-- Dashboard Page -->
+        <div id="dashboard" class="page">
+            <h2 class="title" style="font-size: 3rem;">DASHBOARD</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalGames">0</div>
+                    <div class="stat-label">Total Games</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="playerWins">0</div>
+                    <div class="stat-label">Your Wins</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="aiWins">0</div>
+                    <div class="stat-label">AI Wins</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="draws">0</div>
+                    <div class="stat-label">Draws</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="friendWins">0</div> <!-- Added for friend wins -->
+                    <div class="stat-label">Friend Wins</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="winRate">0%</div>
+                    <div class="stat-label">Win Rate</div>
+                </div>
+            </div>
+            <button class="btn reset-btn" onclick="resetStats()">Reset Statistics</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
