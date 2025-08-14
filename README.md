@@ -23,7 +23,7 @@ It is an interactive **Tic Tac Toe Game** built using **HTML, CSS, and JavaScrip
 4. The scoreboard updates after each match.
 
 ## 🔗 Live Demo
-[View Live Project](https://yourusername.github.io/PRODIGY_WD_03/)
+[View Live Project](https://sathi-dey.github.io/PRODIGY_WD_03/)
 
 ---
 
